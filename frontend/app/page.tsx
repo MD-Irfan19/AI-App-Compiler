@@ -233,7 +233,7 @@ export default function AIAppCompiler() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const res = await fetch('http://localhost:8000/metrics')
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/metrics`)
         if (res.ok) {
           const data = await res.json()
           setMetrics(data)
@@ -276,7 +276,7 @@ export default function AIAppCompiler() {
     }, 100)
 
     try {
-      const res = await fetch('http://localhost:8000/compile/stream', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/compile/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
