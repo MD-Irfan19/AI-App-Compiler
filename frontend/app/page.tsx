@@ -147,17 +147,6 @@ interface CompileResponse {
   generated_app_path?: string | null
 }
 
-interface Metrics {
-  total_runs: number
-  success_rate: string            // ← backend returns string like "100.0%"
-  average_duration_ms: number     // ← not avg_duration_ms
-  recent_runs: {
-    timestamp: string
-    success: boolean
-    total_duration_ms: number     // ← not duration_ms
-  }[]
-}
-
 // ─────────────────────────────────────────────
 // CONSTANTS
 // ─────────────────────────────────────────────
@@ -216,9 +205,7 @@ export default function AIAppCompiler() {
   const [result, setResult] = useState<CompileResponse | null>(null)
   const [error, setError] = useState<{ message: string; stage?: string } | null>(null)
   const [activeTab, setActiveTab] = useState('intent')
-  const [copied, setCopied] = useState(false)
-  const [metrics, setMetrics] = useState<Metrics | null>(null)
-  const [metricsExpanded, setMetricsExpanded] = useState(false)
+
   const [liveStages, setLiveStages] = useState<StageResult[]>([])
   const [activeSubsteps, setActiveSubsteps] = useState<string[]>([])
   const abortControllerRef = useRef<AbortController | null>(null)
@@ -229,21 +216,7 @@ export default function AIAppCompiler() {
     typingSpeed: 50,
   })
 
-  // Fetch metrics on mount
-  useEffect(() => {
-    const fetchMetrics = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/metrics`)
-        if (res.ok) {
-          const data = await res.json()
-          setMetrics(data)
-        }
-      } catch {
-        // Silently fail
-      }
-    }
-    fetchMetrics()
-  }, [])
+  const [copied, setCopied] = useState(false)
 
   // Timer
   useEffect(() => {
@@ -754,83 +727,6 @@ export default function AIAppCompiler() {
           )}
         </AnimatePresence>
 
-        {/* Metrics Panel — fixed field names */}
-        {metrics && (
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-8"
-          >
-            <div className="frost-glass rounded-2xl overflow-hidden">
-              <button
-                onClick={() => setMetricsExpanded(!metricsExpanded)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-muted/10 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Activity className="w-5 h-5 text-primary" />
-                  <span className="font-medium text-foreground">System Metrics</span>
-                </div>
-                {metricsExpanded
-                  ? <ChevronUp className="w-5 h-5 text-muted-foreground" />
-                  : <ChevronDown className="w-5 h-5 text-muted-foreground" />
-                }
-              </button>
-              <AnimatePresence>
-                {metricsExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="border-t border-border/30"
-                  >
-                    <div className="p-6">
-                      <div className="grid grid-cols-3 gap-4 mb-6">
-                        <div className="frost-glass-subtle rounded-xl p-4 text-center">
-                          <p className="text-2xl font-bold text-primary">{metrics.total_runs}</p>
-                          <p className="text-xs text-muted-foreground">Total Runs</p>
-                        </div>
-                        <div className="frost-glass-subtle rounded-xl p-4 text-center">
-                          <p className="text-2xl font-bold text-green-400">
-                            {metrics.success_rate}
-                          </p>
-                          <p className="text-xs text-muted-foreground">Success Rate</p>
-                        </div>
-                        <div className="frost-glass-subtle rounded-xl p-4 text-center">
-                          <p className="text-2xl font-bold text-accent">
-                            {((metrics.average_duration_ms ?? 0) / 1000).toFixed(2)}s
-                          </p>
-                          <p className="text-xs text-muted-foreground">Avg Duration</p>
-                        </div>
-                      </div>
-                      {(metrics.recent_runs ?? []).length > 0 && (
-                        <div>
-                          <h5 className="text-sm font-medium text-foreground mb-3">Recent Runs</h5>
-                          <div className="space-y-2">
-                            {metrics.recent_runs.slice(0, 5).map((run, index) => (
-                              <div key={index} className="flex items-center justify-between p-2 frost-glass-subtle rounded-lg text-sm">
-                                <span className="text-muted-foreground text-xs">
-                                  {new Date(run.timestamp).toLocaleTimeString()}
-                                </span>
-                                <div className="flex items-center gap-3">
-                                  <span className="text-foreground/80">
-                                    {((run.total_duration_ms ?? 0) / 1000).toFixed(2)}s
-                                  </span>
-                                  <span className={`w-2 h-2 rounded-full ${run.success ? 'bg-green-400' : 'bg-destructive'
-                                    }`} />
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </motion.section>
-        )}
       </div>
     </div>
   )
