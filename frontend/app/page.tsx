@@ -21,6 +21,7 @@ import {
   Layout,
   GitBranch,
   RefreshCw,
+  Download,
 } from 'lucide-react'
 import { AnimatedBackground } from '@/components/animated-background'
 import { useAnimatedPlaceholder } from '@/components/animated-placeholder'
@@ -643,6 +644,29 @@ export default function AIAppCompiler() {
                   </div>
                 </div>
               </div>
+
+              {/* Download card — only shown when Generate App Files was checked */}
+              {result.generated_app_path && (
+                <div className="frost-glass rounded-2xl p-4 sm:p-5 mb-6 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <Download className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Generated App Ready</p>
+                      <p className="text-xs text-muted-foreground">A complete, runnable Next.js scaffold has been generated</p>
+                    </div>
+                  </div>
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_API_URL}${result.generated_app_path}`}
+                    className="flex items-center gap-2 px-4 py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 font-medium rounded-xl text-sm transition-all duration-300 border border-green-500/20 hover:border-green-500/40 flex-shrink-0"
+                    download
+                  >
+                    <Download className="w-4 h-4" />
+                    Download (.zip)
+                  </a>
+                </div>
+              )}
 
               {/* Tabs and Content */}
               <div className="flex flex-col lg:flex-row gap-6">

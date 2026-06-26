@@ -17,7 +17,7 @@ from pipeline.stage3_schema import (
 )
 from pipeline.stage4_refine import run_stage4
 from fastapi.responses import StreamingResponse
-from runtime.generator import generate_app
+from runtime.generator import generate_app, zip_generated_app
 from validation.repair import check_cross_layer_consistency
 
 load_dotenv()
@@ -44,7 +44,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai-app-compiler-eta.vercel.app/"],
+    allow_origins=[
+        "https://ai-app-compiler-eta.vercel.app",
+        "http://localhost:3000",                 
+        "http://localhost:3001",                 
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -208,8 +212,9 @@ async def compile_prompt(request: CompileRequest):
         if request.generate_app_files:
             safe_name = final_config.intent.app_name.replace(" ", "_").lower()
             output_dir = os.path.join("generated_apps", safe_name)
-            generated_path = generate_app(final_config, output_dir=output_dir)
-            logger.info(f"App files generated at: {generated_path}")
+            _folder_path, zip_path = generate_app(final_config, output_dir=output_dir)
+            generated_path = f"/download/{os.path.basename(zip_path)}"
+            logger.info(f"App zipped and ready for download at: {generated_path}")
 
         total_duration = int((time.time() - total_start) * 1000)
 
@@ -368,8 +373,9 @@ async def compile_stream(request: CompileRequest):
             if request.generate_app_files:
                 safe_name = final_config.intent.app_name.replace(" ", "_").lower()
                 output_dir = os.path.join("generated_apps", safe_name)
-                generated_path = await asyncio.to_thread(generate_app, final_config, output_dir=output_dir)
-                logger.info(f"App files generated at: {generated_path}")
+                _folder_path, zip_path = await asyncio.to_thread(generate_app, final_config, output_dir=output_dir)
+                generated_path = f"/download/{os.path.basename(zip_path)}"
+                logger.info(f"App zipped and ready for download at: {generated_path}")
 
             total_duration = int((time.time() - total_start) * 1000)
 
@@ -400,6 +406,41 @@ async def compile_stream(request: CompileRequest):
             yield f"data: {json.dumps({'type': 'error', 'stage': stage_name, 'message': str(e)})}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+# ─────────────────────────────────────────────
+# DOWNLOAD ENDPOINT
+# NOTE: Generated apps are stored temporarily on local disk and zipped
+# for download. On platforms with ephemeral filesystems (e.g. Render
+# free tier), these files do not persist across service restarts or
+# redeploys. This is acceptable for demo purposes but would need
+# external storage (S3, etc.) for production persistence.
+# ─────────────────────────────────────────────
+
+@app.get("/download/{filename}")
+async def download_generated_app(filename: str):
+    """
+    Serves a previously generated app's zip file for download.
+    """
+    from fastapi.responses import FileResponse
+
+    # Security: prevent path traversal — only allow simple filenames,
+    # no directory separators or '..' sequences
+    if "/" in filename or "\\" in filename or ".." in filename:
+        raise HTTPException(status_code=400, detail="Invalid filename")
+
+    zip_path = os.path.join("generated_apps", filename)
+
+    if not os.path.exists(zip_path):
+        raise HTTPException(
+            status_code=404,
+            detail="Generated app not found. It may have expired or the server may have restarted."
+        )
+
+    return FileResponse(
+        path=zip_path,
+        media_type="application/zip",
+        filename=filename,
+    )
 
 # ─────────────────────────────────────────────
 # HEALTH CHECK

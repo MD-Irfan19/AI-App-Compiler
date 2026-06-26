@@ -78,5 +78,13 @@
     "total_duration_ms": 239876,
     "stages_completed": 4,
     "error": null
+  },
+  {
+    "timestamp": "2026-06-26T13:20:15.657281",
+    "prompt": "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admi",
+    "success": true,
+    "total_duration_ms": 381588,
+    "stages_completed": 4,
+    "error": null
   }
 ]

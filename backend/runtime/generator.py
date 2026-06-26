@@ -797,7 +797,34 @@ app-config.json
 # MASTER GENERATOR
 # ─────────────────────────────────────────────
 
-def generate_app(config: AppConfig, output_dir: str = "generated_app") -> str:
+def zip_generated_app(output_dir: str) -> str:
+    """
+    Zips the entire generated app directory into a single .zip file.
+    Returns the absolute path to the created zip file.
+    shutil.make_archive appends .zip automatically, so base_name must NOT
+    include the .zip extension.
+    """
+    import shutil
+    out = Path(output_dir)
+    # base_name is the path without .zip — shutil appends it
+    zip_base = str(out)  # e.g. "generated_apps/crm_app"
+    shutil.make_archive(
+        base_name=zip_base,
+        format="zip",
+        root_dir=str(out.parent),
+        base_dir=out.name,
+    )
+    zip_path = zip_base + ".zip"
+    logger.info(f"Zipped generated app to: {zip_path}")
+    return zip_path
+
+
+def generate_app(config: AppConfig, output_dir: str = "generated_app") -> tuple[str, str]:
+    """
+    Generates a full Next.js scaffold and zips it.
+    Returns (folder_path, zip_path) — folder_path is the local directory,
+    zip_path is the .zip file ready to serve for download.
+    """
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
 
@@ -832,7 +859,11 @@ def generate_app(config: AppConfig, output_dir: str = "generated_app") -> str:
     gen_readme(config, out)
 
     logger.info(f"App generation complete: {out.resolve()}")
-    return str(out.resolve())
+
+    # Zip the output directory so it can be served as a single download
+    zip_path = zip_generated_app(output_dir)
+
+    return str(out.resolve()), zip_path
 
 
 # ─────────────────────────────────────────────
