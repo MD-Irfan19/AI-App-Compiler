@@ -379,29 +379,30 @@ export default function AIAppCompiler() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 pt-16"
+          className="text-center mb-10 pt-10 sm:pt-16 sm:mb-12"
         >
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <Sparkles className="w-10 h-10 text-primary" />
-            <h1 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent text-glow-blue">
+          <div className="mb-5 flex items-center justify-center gap-2 sm:gap-3">
+            <Sparkles className="w-7 h-7 sm:w-10 sm:h-10 text-primary" />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent text-glow-blue">
               AI App Compiler
             </h1>
           </div>
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-base sm:text-lg text-muted-foreground mb-6">
             Natural Language → Structured App Configuration
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-4 py-2 rounded-full text-sm font-medium text-foreground/90 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-primary" />4-Stage Pipeline
+          {/* 2-col grid on mobile so all 4 badges fit neatly; flex-wrap row from sm up */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 sm:gap-3 max-w-sm sm:max-w-none mx-auto">
+            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium text-foreground/90 flex items-center gap-1.5 sm:gap-2 justify-center">
+              <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />4-Stage Pipeline
             </motion.span>
-            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-4 py-2 rounded-full text-sm font-medium text-foreground/90 flex items-center gap-2">
-              <Zap className="w-4 h-4 text-accent" />Powered by Nvidia NIM
+            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium text-foreground/90 flex items-center gap-1.5 sm:gap-2 justify-center">
+              <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent flex-shrink-0" />Powered by Nvidia NIM
             </motion.span>
-            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-4 py-2 rounded-full text-sm font-medium text-foreground/90 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-primary" />Enterprise-Ready Schemas
+            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium text-foreground/90 flex items-center gap-1.5 sm:gap-2 justify-center">
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />Enterprise Schemas
             </motion.span>
-            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-4 py-2 rounded-full text-sm font-medium text-foreground/90 flex items-center gap-2">
-              <Brain className="w-4 h-4 text-accent" />AI-Powered Architecture
+            <motion.span whileHover={{ scale: 1.05 }} className="frost-glass-subtle px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium text-foreground/90 flex items-center gap-1.5 sm:gap-2 justify-center">
+              <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent flex-shrink-0" />AI Architecture
             </motion.span>
           </div>
         </motion.header>
@@ -413,12 +414,13 @@ export default function AIAppCompiler() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-8"
         >
-          <div className="frost-glass-strong rounded-2xl p-6 sm:p-8 flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+          {/* Icon hidden on very small screens to give textarea more room */}
+          <div className="frost-glass-strong rounded-2xl p-4 sm:p-6 lg:p-8 flex items-start gap-3 sm:gap-4">
+            <div className="hidden sm:flex w-12 h-12 rounded-full bg-primary/20 items-center justify-center flex-shrink-0">
               <Sparkles className="w-6 h-6 text-primary" />
             </div>
-            <div className="flex-1">
-              <label htmlFor="prompt" className="block text-lg font-medium text-foreground/80 mb-3">
+            <div className="flex-1 min-w-0">
+              <label htmlFor="prompt" className="block text-base sm:text-lg font-medium text-foreground/80 mb-3">
                 What Should We Build Today?
               </label>
               <textarea
@@ -426,12 +428,13 @@ export default function AIAppCompiler() {
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder={animatedPlaceholder}
-                className="w-full h-36 bg-[oklch(0.04_0.005_260_/_60%)] border border-border/40 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 resize-none font-mono text-sm"
+                className="w-full h-28 sm:h-36 bg-[oklch(0.04_0.005_260_/_60%)] border border-border/40 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 resize-none font-mono text-sm"
                 disabled={isCompiling}
               />
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
+              {/* Toggle + button: column on mobile, row from sm up */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
                 <label className="flex items-center gap-3 cursor-pointer group px-4 py-3 frost-glass-subtle rounded-lg hover:bg-primary/5 transition-all duration-300">
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <input
                       type="checkbox"
                       checked={generateFiles}
@@ -452,7 +455,7 @@ export default function AIAppCompiler() {
                   whileTap={{ scale: 0.98 }}
                   onClick={handleCompile}
                   disabled={isCompiling || !prompt.trim()}
-                  className="px-8 py-3 bg-gradient-to-r from-primary to-blue-500 text-primary-foreground font-semibold rounded-xl shadow-lg glow-blue disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center gap-2"
+                  className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-primary to-blue-500 text-primary-foreground font-semibold rounded-xl shadow-lg glow-blue disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   {isCompiling ? (
                     <><RefreshCw className="w-5 h-5 animate-spin" />Compiling...</>
@@ -461,7 +464,7 @@ export default function AIAppCompiler() {
                   )}
                 </motion.button>
               </div>
-              <div className="mt-6 pt-6 border-t border-border/30">
+              <div className="mt-5 pt-5 border-t border-border/30">
                 <p className="text-xs text-muted-foreground mb-3">Try an example:</p>
                 <div className="flex flex-wrap gap-2">
                   {EXAMPLE_PROMPTS.map((example) => (
@@ -471,7 +474,7 @@ export default function AIAppCompiler() {
                       whileTap={{ scale: 0.97 }}
                       onClick={() => handleExampleClick(example)}
                       disabled={isCompiling}
-                      className="px-4 py-2 frost-glass-subtle rounded-full text-sm text-foreground/70 hover:text-foreground hover:border-primary/20 transition-all duration-300 disabled:opacity-50"
+                      className="px-4 py-2.5 frost-glass-subtle rounded-full text-sm text-foreground/70 hover:text-foreground hover:border-primary/20 transition-all duration-300 disabled:opacity-50"
                     >
                       {example}
                     </motion.button>
@@ -492,19 +495,19 @@ export default function AIAppCompiler() {
               exit={{ opacity: 0, height: 0 }}
               className="mb-8 overflow-hidden"
             >
-              <div className="frost-glass rounded-2xl p-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+              <div className="frost-glass rounded-2xl p-4 sm:p-6 flex items-start gap-3 sm:gap-4">
+                <div className="hidden sm:flex w-12 h-12 rounded-full bg-primary/20 items-center justify-center flex-shrink-0">
                   <Activity className="w-6 h-6 text-primary" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-foreground">Pipeline Progress</h3>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground">Pipeline Progress</h3>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       {(elapsedTime / 1000).toFixed(1)}s
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {PIPELINE_STEPS.map((step, index) => {
                       const Icon = step.icon
                       const isActive = currentStep === index
@@ -603,12 +606,12 @@ export default function AIAppCompiler() {
               transition={{ duration: 0.5 }}
             >
               {/* Summary Bar */}
-              <div className="frost-glass-strong rounded-2xl p-4 sm:p-6 mb-6 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+              <div className="frost-glass-strong rounded-2xl p-4 sm:p-6 mb-6 flex items-start gap-3 sm:gap-4">
+                <div className="hidden sm:flex w-12 h-12 rounded-full bg-primary/20 items-center justify-center flex-shrink-0">
                   <CheckCircle2 className="w-6 h-6 text-primary" />
                 </div>
-                <div className="flex-1">
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                     <div>
                       <p className="text-xs text-muted-foreground mb-1">App Name</p>
                       <p className="font-semibold text-foreground truncate">
@@ -645,10 +648,10 @@ export default function AIAppCompiler() {
                 </div>
               </div>
 
-              {/* Download card — only shown when Generate App Files was checked */}
+              {/* Download card — stacks to flex-col on mobile, row from sm up */}
               {result.generated_app_path && (
-                <div className="frost-glass rounded-2xl p-4 sm:p-5 mb-6 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
+                <div className="frost-glass rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
                       <Download className="w-5 h-5 text-green-400" />
                     </div>
@@ -659,7 +662,7 @@ export default function AIAppCompiler() {
                   </div>
                   <a
                     href={`${process.env.NEXT_PUBLIC_API_URL}${result.generated_app_path}`}
-                    className="flex items-center gap-2 px-4 py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 font-medium rounded-xl text-sm transition-all duration-300 border border-green-500/20 hover:border-green-500/40 flex-shrink-0"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-green-500/20 hover:bg-green-500/30 text-green-400 font-medium rounded-xl text-sm transition-all duration-300 border border-green-500/20 hover:border-green-500/40 flex-shrink-0"
                     download
                   >
                     <Download className="w-4 h-4" />
@@ -670,32 +673,37 @@ export default function AIAppCompiler() {
 
               {/* Tabs and Content */}
               <div className="flex flex-col lg:flex-row gap-6">
-                <div className="flex-1">
-                  {/* Tab Navigation — unchanged */}
-                  <div className="frost-glass rounded-xl p-2 mb-4 overflow-x-auto flex items-center gap-3">
-                    <Code2 className="w-5 h-5 text-primary flex-shrink-0" />
-                    <div className="flex gap-1 min-w-max">
-                      {TAB_ITEMS.map((tab) => {
-                        const Icon = tab.icon
-                        return (
-                          <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${activeTab === tab.id
-                              ? 'bg-primary/20 text-primary'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
+                <div className="flex-1 min-w-0">
+                  {/* Tab Navigation — horizontally scrollable on mobile with right-fade hint */}
+                  <div className="relative mb-4">
+                    <div className="frost-glass rounded-xl p-1.5 sm:p-2 overflow-x-auto flex items-center gap-2 sm:gap-3 scrollbar-none">
+                      <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 ml-1" />
+                      <div className="flex gap-0.5 sm:gap-1 min-w-max">
+                        {TAB_ITEMS.map((tab) => {
+                          const Icon = tab.icon
+                          return (
+                            <button
+                              key={tab.id}
+                              onClick={() => setActiveTab(tab.id)}
+                              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                                activeTab === tab.id
+                                  ? 'bg-primary/20 text-primary'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
                               }`}
-                          >
-                            <Icon className="w-4 h-4" />
-                            {tab.label}
-                          </button>
-                        )
-                      })}
+                            >
+                              <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                              {tab.label}
+                            </button>
+                          )
+                        })}
+                      </div>
                     </div>
+                    {/* Subtle right-edge fade to hint at off-screen tabs */}
+                    <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-background/60 to-transparent rounded-r-xl pointer-events-none" />
                   </div>
 
-                  {/* Tab Content — fixed data sources */}
-                  <div className="frost-glass rounded-2xl p-6 min-h-[400px]">
+                  {/* Tab Content */}
+                  <div className="frost-glass rounded-2xl p-4 sm:p-6 min-h-[300px] sm:min-h-[400px]">
                     <AnimatePresence mode="wait">
                       {activeTab === 'intent' && (
                         <IntentTab key="intent" intent={config.intent} />
@@ -722,23 +730,25 @@ export default function AIAppCompiler() {
                   </div>
                 </div>
 
-                {/* Pipeline Stages Sidebar — fixed field names */}
-                <div className="lg:w-64">
+                {/* Pipeline Stages Sidebar — stacks below content on mobile/tablet, side at lg+ */}
+                <div className="lg:w-64 lg:flex-shrink-0">
                   <div className="frost-glass rounded-2xl p-4">
-                    <h4 className="text-sm font-semibold text-foreground mb-4">Pipeline Stages</h4>
-                    <div className="space-y-3">
+                    <h4 className="text-sm font-semibold text-foreground mb-3 sm:mb-4">Pipeline Stages</h4>
+                    {/* 2-col grid on mobile so sidebar doesn't get too tall stacked */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3">
                       {(result ? result.stages : liveStages).map((stage, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 frost-glass-subtle rounded-lg">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-foreground truncate capitalize">
+                        <div key={index} className="flex items-center justify-between p-2.5 sm:p-3 frost-glass-subtle rounded-lg">
+                          <div className="flex-1 min-w-0 mr-2">
+                            <p className="text-xs sm:text-sm font-medium text-foreground truncate capitalize">
                               {stage.stage.replace(/_/g, ' ')}
                             </p>
                             <p className="text-xs text-muted-foreground">{stage.duration_ms}ms</p>
                           </div>
-                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${stage.status === 'success'
-                            ? 'bg-green-500/20 text-green-400'
-                            : 'bg-destructive/20 text-destructive'
-                            }`}>
+                          <span className={`flex-shrink-0 px-2 py-0.5 rounded-full text-xs font-medium ${
+                            stage.status === 'success'
+                              ? 'bg-green-500/20 text-green-400'
+                              : 'bg-destructive/20 text-destructive'
+                          }`}>
                             {stage.status === 'success' ? 'OK' : 'Fail'}
                           </span>
                         </div>
@@ -830,17 +840,18 @@ function DatabaseTab({ tables }: { tables: DatabaseTable[] }) {
           </h4>
           <div className="space-y-2">
             {(table.fields ?? []).map((field) => (
-              <div key={field.name} className="flex items-center justify-between text-sm p-2 bg-[oklch(0.04_0.005_260_/_50%)] rounded-lg">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-foreground">{field.name}</span>
-                  <span className="text-muted-foreground">{field.type}</span>
+              /* Wraps to 2 lines on very narrow screens: name+type on top, badges on bottom */
+              <div key={field.name} className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm p-2 bg-[oklch(0.04_0.005_260_/_50%)] rounded-lg gap-1 sm:gap-0">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="font-mono text-foreground truncate">{field.name}</span>
+                  <span className="text-muted-foreground flex-shrink-0">{field.type}</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-shrink-0">
                   {field.primary_key && (
                     <span className="px-2 py-0.5 bg-primary/20 text-primary rounded text-xs font-medium">PK</span>
                   )}
                   {field.foreign_key && (
-                    <span className="px-2 py-0.5 bg-accent/20 text-accent rounded text-xs font-medium">
+                    <span className="px-2 py-0.5 bg-accent/20 text-accent rounded text-xs font-medium truncate max-w-[120px]">
                       FK → {field.foreign_key}
                     </span>
                   )}
@@ -1060,7 +1071,7 @@ function JsonTab({
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
           >
-            <pre className="bg-[oklch(0.03_0.005_260_/_70%)] rounded-xl p-4 overflow-x-auto text-xs font-mono text-foreground/70 max-h-[500px] overflow-y-auto border border-border/30">
+            <pre className="bg-[oklch(0.03_0.005_260_/_70%)] rounded-xl p-3 sm:p-4 overflow-x-auto text-xs font-mono text-foreground/70 max-h-[400px] sm:max-h-[500px] overflow-y-auto border border-border/30 w-full">
               {JSON.stringify(data, null, 2)}
             </pre>
           </motion.div>
