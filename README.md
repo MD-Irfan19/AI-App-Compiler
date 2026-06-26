@@ -133,7 +133,8 @@ ai-app-compiler/
 │   │   ├── layout.tsx
 │   │   └── globals.css
 │   ├── package.json
-│   └── tsconfig.json
+│   ├── tsconfig.json
+│   └── .env.local  
 │
 ├── evaluation/
 │   ├── test_prompts.json           # 20 test prompts (real-world + edge cases)
