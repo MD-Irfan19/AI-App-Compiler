@@ -1,0 +1,82 @@
+[
+  {
+    "timestamp": "2026-06-04T10:09:12.581541",
+    "prompt": "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admi",
+    "success": true,
+    "total_duration_ms": 672430,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-08T07:36:33.683679",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 540361,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-08T07:50:32.316647",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 698618,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-08T08:44:36.708995",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 362187,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-09T05:32:46.894772",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 376581,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-09T11:25:42.157442",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 760138,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-09T11:48:29.064769",
+    "prompt": "CRM with payments and analytics",
+    "success": true,
+    "total_duration_ms": 725681,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-09T11:59:39.382040",
+    "prompt": "Project management like Trello",
+    "success": true,
+    "total_duration_ms": 603118,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20T12:07:12.924277",
+    "prompt": "Create a learning management system with courses, lessons, quizzes, student progress tracking, and i",
+    "success": true,
+    "total_duration_ms": 547453,
+    "stages_completed": 4,
+    "error": null
+  },
+  {
+    "timestamp": "2026-06-20T12:42:52.653126",
+    "prompt": "E-commerce with cart and orders",
+    "success": true,
+    "total_duration_ms": 239876,
+    "stages_completed": 4,
+    "error": null
+  }
+]

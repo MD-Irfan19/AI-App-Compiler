@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "category": "real_product",
+    "prompt": "Build a CRM with login, contacts, dashboard, role-based access, and premium plan with payments. Admins can see analytics."
+  },
+  {
+    "id": 2,
+    "category": "real_product",
+    "prompt": "Create a project management tool like Trello with boards, cards, team members, due dates, and notifications."
+  },
+  {
+    "id": 3,
+    "category": "real_product",
+    "prompt": "Build an e-commerce platform with product listings, shopping cart, checkout, order tracking, and admin dashboard."
+  },
+  {
+    "id": 4,
+    "category": "real_product",
+    "prompt": "Create a learning management system with courses, lessons, quizzes, student progress tracking, and instructor dashboard."
+  },
+  {
+    "id": 5,
+    "category": "real_product",
+    "prompt": "Build a helpdesk ticketing system with ticket creation, assignment, priority levels, SLA tracking, and reporting."
+  },
+  {
+    "id": 6,
+    "category": "real_product",
+    "prompt": "Create a hospital management system with patient records, appointments, doctor schedules, billing, and pharmacy."
+  },
+  {
+    "id": 7,
+    "category": "real_product",
+    "prompt": "Build a real estate platform with property listings, search filters, agent profiles, appointment booking, and mortgage calculator."
+  },
+  {
+    "id": 8,
+    "category": "real_product",
+    "prompt": "Create a restaurant management system with menu management, table reservations, orders, kitchen display, and analytics."
+  },
+  {
+    "id": 9,
+    "category": "real_product",
+    "prompt": "Build a social media scheduling tool with post creation, multi-platform publishing, analytics, and team collaboration."
+  },
+  {
+    "id": 10,
+    "category": "real_product",
+    "prompt": "Create an HR management system with employee profiles, leave management, payroll, performance reviews, and org chart."
+  },
+  {
+    "id": 11,
+    "category": "edge_vague",
+    "prompt": "Build me an app."
+  },
+  {
+    "id": 12,
+    "category": "edge_vague",
+    "prompt": "I need something for my business to manage stuff."
+  },
+  {
+    "id": 13,
+    "category": "edge_vague",
+    "prompt": "Make a website with login."
+  },
+  {
+    "id": 14,
+    "category": "edge_vague",
+    "prompt": "Build an app like Uber but different."
+  },
+  {
+    "id": 15,
+    "category": "edge_vague",
+    "prompt": "I want a dashboard."
+  },
+  {
+    "id": 16,
+    "category": "edge_conflicting",
+    "prompt": "Build a completely free app with no login required but also make sure all data is private and secure per user with premium payments."
+  },
+  {
+    "id": 17,
+    "category": "edge_conflicting",
+    "prompt": "Create a real-time chat app that works offline and syncs instantly across all devices simultaneously without any server."
+  },
+  {
+    "id": 18,
+    "category": "edge_conflicting",
+    "prompt": "Build an app where admins have no special permissions but can also delete any user and access all private data."
+  },
+  {
+    "id": 19,
+    "category": "edge_incomplete",
+    "prompt": "Build a booking system with payments."
+  },
+  {
+    "id": 20,
+    "category": "edge_incomplete",
+    "prompt": "Create an inventory app with reports and user roles."
+  }
+]
