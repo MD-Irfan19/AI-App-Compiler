@@ -6,7 +6,7 @@ A system that behaves like a compiler for software generation. It takes an open-
 
 This is not a single prompt-to-JSON wrapper. It is a multi-stage pipeline with dedicated validation, automatic repair, and cross-layer consistency enforcement at every step.
 
-🔗 **Live Demo:** _[coming soon]_
+🔗 **Live Demo:** [AI App Compiler](https://ai-app-compiler-eta.vercel.app)
 🎥 **Walkthrough Video:** _[coming soon]_
 
 ---
